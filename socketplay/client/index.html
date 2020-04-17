@@ -1,0 +1,50 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io();
+
+	var updateBoard = function(num) {
+		//console.log(num);
+		socket.emit('updateBoard', {
+			num:num
+		});
+	}
+	
+	socket.on('updateBoard', function(data) {
+		//console.log(data.val);
+		var strId = data.num.toString();
+		var b = document.getElementById(strId);
+		if(data.val) {
+			b.innerHTML = "X";
+			console.log("changed " + strId + " to x");
+		}
+		else {
+			b.innerHTML = "O";
+			console.log("changed " + strId + " to o");
+
+		}
+	});
+
+</script>
+
+<html>
+	<head>
+		<title>TicTacToe</title>
+	</head>
+	<body>
+		<div>
+			<button id="1" onclick="updateBoard(1)"></button>
+			<button id="2" onclick="updateBoard(2)">  </button>
+			<button id="3" onclick="updateBoard(3)">  </button>
+			<br> 
+			<button id="4" onclick="updateBoard(4)">  </button>
+			<button id="5" onclick="updateBoard(5)">  </button>
+			<button id="6" onclick="updateBoard(6)">  </button>
+			<br>
+			<button id="7" onclick="updateBoard(7)">  </button>
+			<button id="8" onclick="updateBoard(8)">  </button>
+			<button id="9" onclick="updateBoard(9)">  </button>
+		</div>
+		<button>reset</button>
+
+	</body>
+</html>
